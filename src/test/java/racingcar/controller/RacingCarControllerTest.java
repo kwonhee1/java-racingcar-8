@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.RacingCar;
 import racingcar.domain.TestForwardCondition;
+import racingcar.service.RacingService;
 import racingcar.view.InputView;
 import racingcar.view.OutputMessage;
 import racingcar.view.OutputView;
@@ -20,13 +21,14 @@ public class RacingCarControllerTest {
 
         InputView inputView = new TestInputView(carList, 3);
         OutputView outputView = new TestOutputView(result);
-        RacingController racingController = new RacingController(inputView, outputView);
+        RacingController racingController = new RacingController(inputView, outputView, RacingService.of());
         RacingCar.setForwardCondition(new TestForwardCondition());
 
         racingController.run();
+        String winnerCars = String.join(OutputMessage.RESULT_END_JOIN_REGEX.getMessage(), carList);
 
         Assertions.assertThat(result.toString())
                 .contains(OutputMessage.RESULT_CAR_NAME_PART.getMessage("aaa"))
-                .contains(String.join(OutputMessage.RESULT_END_JOIN_REGEX.getMessage(), carList));
+                .contains(OutputMessage.RESULT_END.getMessage(winnerCars));
     }
 }

@@ -2,11 +2,9 @@ package racingcar.controller;
 
 import java.util.List;
 import java.util.function.Supplier;
-import racingcar.controller.mapper.ExceptionMapper;
+import racingcar.controller.exception.ExceptionMapper;
 import racingcar.domain.RacingCar;
 import racingcar.service.RacingService;
-import racingcar.service.dto.CarCapture;
-import racingcar.service.dto.RacingCapture;
 import racingcar.service.dto.RacingResult;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -18,10 +16,14 @@ public class RacingController {
     private RacingService racingService;
     private ExceptionMapper exceptionMapper;
 
-    public RacingController(InputView inputView, OutputView outputView) {
+    public RacingController(
+            InputView inputView,
+            OutputView outputView,
+            RacingService racingService
+    ) {
         this.inputView = inputView;
         this.outputView = outputView;
-        racingService = RacingService.of();
+        this.racingService = racingService;
         exceptionMapper = ExceptionMapper.of();
     }
 
