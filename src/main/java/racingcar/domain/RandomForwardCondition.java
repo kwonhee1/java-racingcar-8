@@ -1,6 +1,7 @@
 package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.constant.RacingCarConstant;
 
 public class RandomForwardCondition implements ForwardCondition {
 
@@ -12,7 +13,7 @@ public class RandomForwardCondition implements ForwardCondition {
 
     @Override
     public boolean canForward() {
-        if(Randoms.pickNumberInRange(0, 9) > 4)
+        if(Randoms.pickNumberInRange(0, 9) >= RacingCarConstant.RANDOM_FORWARD_CONDITION_INCLUSIVE_VALUE)
             return true;
         return false;
     }
