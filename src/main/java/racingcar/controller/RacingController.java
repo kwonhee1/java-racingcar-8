@@ -1,7 +1,6 @@
 package racingcar.controller;
 
 import java.util.List;
-import java.util.function.Supplier;
 import racingcar.domain.RacingCar;
 import racingcar.domain.exception.TooLongCarNameException;
 import racingcar.service.RacingService;
@@ -25,29 +24,28 @@ public class RacingController {
     }
 
     public void run() {
-        InputDto input = supply(()->inputCarNamesAndRacingCount());
-        RacingResult result = racing(input);
+        List<RacingCar> carList = createRacingCars();
+        RacingResult result = racing(carList);
         printResult(result);
     }
 
-    private InputDto inputCarNamesAndRacingCount() {
-        List<String> carNames = inputView.inputCarNames();
-        Integer racingCount = inputView.inputRacingCount();
-
-        return new InputDto(carNames, racingCount);
-    }
-
-    private RacingResult racing(InputDto input) {
-        List<RacingCar> carList = createRacingCars(input.getCarNameList());
-        return racingService.racing(carList, input.getRacingCount());
-    }
-
-    private List<RacingCar> createRacingCars(List<String> carNames) {
+    private List<RacingCar> createRacingCars() {
         try{
+            List<String> carNames = inputView.inputCarNames();
             return racingService.createRacingCars(carNames);
         } catch (TooLongCarNameException e) {
             outputView.printError(OutputMessage.ERROR_TOO_LONG_CAR_NAME.getMessage());
             throw e;
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            throw e;
+        }
+    }
+
+    private RacingResult racing(List<RacingCar> carList) {
+        try {
+            int racingCount = inputView.inputRacingCount();
+            return racingService.racing(carList, racingCount);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             throw e;
@@ -67,15 +65,6 @@ public class RacingController {
             outputView.printCarResult(carCapture.getCarName(), carCapture.getCarPosition());
         }
         outputView.printNextLine();
-    }
-
-    private <T> T supply(Supplier<T> supplier) {
-        try{
-            return supplier.get();
-        } catch (IllegalArgumentException e) {
-            outputView.printError(e.getMessage());
-            throw e;
-        }
     }
 
 }
