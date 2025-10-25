@@ -5,6 +5,8 @@ import java.util.List;
 import racingcar.domain.RacingCar;
 import racingcar.service.dto.CarCapture;
 import racingcar.service.dto.RacingCapture;
+import racingcar.service.dto.RacingResult;
+import racingcar.service.dto.WinningRacingCar;
 
 public class RacingService {
 
@@ -20,7 +22,14 @@ public class RacingService {
                 .toList();
     }
 
-    public List<RacingCapture> racingManyTimes(List<RacingCar> racingCarList, int racingCount) {
+    public RacingResult racing(List<RacingCar> racingCarList, int racingCount) {
+        List<RacingCapture> racingCaptureList = racingManyTimes(racingCarList, racingCount);
+        WinningRacingCar winningRacingCar = getWinningRacingCar(racingCaptureList.getLast());
+
+        return new RacingResult(racingCaptureList, winningRacingCar);
+    }
+
+    private List<RacingCapture> racingManyTimes(List<RacingCar> racingCarList, int racingCount) {
         List<RacingCapture> racingCaptureList = new ArrayList<>();
 
         for(int nowRacingCount = 1; nowRacingCount <= racingCount; nowRacingCount++) {
@@ -38,5 +47,24 @@ public class RacingService {
             racingCapture.addCapture(CarCapture.capture(racingCar));
         }
         return racingCapture;
+    }
+
+    private WinningRacingCar getWinningRacingCar(RacingCapture lastRacingCapture) {
+        List<CarCapture> lastRacingCarCaptureList = lastRacingCapture.getCarCaptureList();
+
+        int maxPosition = findMaxPosition(lastRacingCarCaptureList);
+        List<CarCapture> winningCarCaptureList = lastRacingCarCaptureList.stream()
+                .filter(carCapture -> carCapture.getCarPosition() == maxPosition)
+                .toList();
+
+        return new WinningRacingCar(winningCarCaptureList, maxPosition);
+    }
+
+    private int findMaxPosition(List<CarCapture> carCaptureList) {
+        int maxPosition = 0;
+        for(CarCapture carCapture : carCaptureList)
+            if(maxPosition < carCapture.getCarPosition())
+                maxPosition = carCapture.getCarPosition();
+        return maxPosition;
     }
 }

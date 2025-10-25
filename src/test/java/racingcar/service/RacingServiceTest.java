@@ -8,6 +8,7 @@ import racingcar.domain.RacingCar;
 import racingcar.domain.TestForwardCondition;
 import racingcar.service.dto.CarCapture;
 import racingcar.service.dto.RacingCapture;
+import racingcar.service.dto.RacingResult;
 
 public class RacingServiceTest {
 
@@ -63,11 +64,12 @@ public class RacingServiceTest {
 
         List<RacingCar> carList = racingService.createRacingCars(List.of("aaa", "bbb"));
 
-        List<RacingCapture> racingResult = racingService.racingManyTimes(carList, 3);
+        RacingResult racingResult = racingService.racing(carList, 3);
+        List<RacingCapture> resultRacingCaptureList = racingResult.getRacingCaptureList();
 
-        RacingCapture firstRacingCapture = racingResult.get(0);
-        RacingCapture secondRacingCapture = racingResult.get(1);
-        RacingCapture thirdRacingCapture = racingResult.get(2);
+        RacingCapture firstRacingCapture = resultRacingCaptureList.get(0);
+        RacingCapture secondRacingCapture = resultRacingCaptureList.get(1);
+        RacingCapture thirdRacingCapture = resultRacingCaptureList.get(2);
 
         CarCapture firstRacingFirstCarCapture = firstRacingCapture.getCarCaptureList().get(0);
         CarCapture secondRacingFirstCarcapture = secondRacingCapture.getCarCaptureList().get(0);

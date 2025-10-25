@@ -36,7 +36,7 @@ public class RacingController {
 
     private RacingResult racing(InputDto input) {
         List<RacingCar> carList = racingService.createRacingCars(input.getCarNameList());
-        return racingService.racingManyTimes(carList, input.getRacingCount());
+        return racingService.racing(carList, input.getRacingCount());
     }
 
     private void printResult(RacingResult racingResult) {
