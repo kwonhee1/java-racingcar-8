@@ -3,6 +3,7 @@ package racingcar.controller;
 import java.util.List;
 import java.util.function.Supplier;
 import racingcar.controller.exception.ExceptionMapper;
+import racingcar.controller.mapper.OutputMapper;
 import racingcar.domain.RacingCar;
 import racingcar.service.RacingService;
 import racingcar.service.dto.RacingResult;
@@ -44,18 +45,11 @@ public class RacingController {
     }
 
     private void printResult(RacingResult racingResult) {
-        outputView.printResultStart();
-        for (RacingCapture racingCapture: racingResult.getRacingCaptureList())
-            printRacingCapture(racingCapture);
+        String racingResultStr = OutputMapper.racingCaptureListToString(racingResult.getRacingCaptureList());
+        String winnerResultStr = OutputMapper.winningRacingCarToString(racingResult.getWinningRacingCar());
 
-        outputView.printResultEnd(racingResult.winningCarNameList());
-    }
-
-    private void printRacingCapture(RacingCapture racingCapture) {
-        for (CarCapture carCapture : racingCapture.getCarCaptureList()){
-            outputView.printCarResult(carCapture.getCarName(), carCapture.getCarPosition());
-        }
-        outputView.printNextLine();
+        outputView.printRacingResult(racingResultStr);
+        outputView.printWinningCarNames(winnerResultStr);
     }
 
     private <T> T supply(Supplier<T> supplier) {

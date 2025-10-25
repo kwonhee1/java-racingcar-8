@@ -16,8 +16,8 @@ public class RacingResult {
         return racingCaptureList;
     }
 
-    public List<String> winningCarNameList() {
-        return winningRacingCar.getCarNameList();
+    public WinningRacingCar getWinningRacingCar() {
+        return winningRacingCar;
     }
 
 }
