@@ -10,7 +10,7 @@ public class SimpleInputView implements InputView {
     public List<String> inputCarNames() {
         System.out.println(OutputMessage.INPUT_CAR_NAMES.getMessage());
         String carNameStrs = Console.readLine();
-        String[] names = carNameStrs.split(RacingCarConstant.CAR_NAME_REGEX);
+        String[] names = carNameStrs.split(RacingCarConstant.CAR_NAME_REGEX_COMMA);
         return List.of(names);
     }
 

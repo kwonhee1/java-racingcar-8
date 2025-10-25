@@ -20,7 +20,7 @@ public class RacingCar {
     }
 
     private void validateCarName(String carName) {
-        if(carName.length() > RacingCarConstant.CAR_NAME_INCLUSIVE_LENGTH)
+        if(carName.length() > RacingCarConstant.CAR_NAME_INCLUSIVE_LENGTH_FIVE)
             throw new IllegalCarNameException();
     }
 

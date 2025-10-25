@@ -13,7 +13,7 @@ public class RandomForwardCondition implements ForwardCondition {
 
     @Override
     public boolean canForward() {
-        if(Randoms.pickNumberInRange(0, 9) >= RacingCarConstant.RANDOM_FORWARD_CONDITION_INCLUSIVE_VALUE)
+        if(Randoms.pickNumberInRange(0, 9) >= RacingCarConstant.RANDOM_FORWARD_CONDITION_INCLUSIVE_VALUE_FOUR)
             return true;
         return false;
     }
