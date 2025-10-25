@@ -1,4 +1,8 @@
 package racingcar.view;
 
-public class InputView {
+import java.util.List;
+
+public interface InputView {
+    List<String> inputCarNames();
+    Integer inputRacingCount();
 }
