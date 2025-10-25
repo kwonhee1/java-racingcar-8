@@ -1,4 +1,4 @@
-package racingcar.controller.mapper;
+package racingcar.controller.exception;
 
 import racingcar.domain.exception.TooLongCarNameException;
 import racingcar.service.RacingCountMustPositiveException;
