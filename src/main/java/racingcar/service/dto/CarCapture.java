@@ -1,4 +1,4 @@
-package racingcar.service.vo;
+package racingcar.service.dto;
 
 import racingcar.domain.RacingCar;
 

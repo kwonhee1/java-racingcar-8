@@ -1,4 +1,4 @@
-package racingcar.service.vo;
+package racingcar.service.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,4 +20,5 @@ public class RacingCapture {
     public List<CarCapture> getCarCaptureList() {
         return carCaptureList;
     }
+
 }

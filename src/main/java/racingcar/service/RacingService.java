@@ -3,8 +3,8 @@ package racingcar.service;
 import java.util.ArrayList;
 import java.util.List;
 import racingcar.domain.RacingCar;
-import racingcar.service.vo.CarCapture;
-import racingcar.service.vo.RacingCapture;
+import racingcar.service.dto.CarCapture;
+import racingcar.service.dto.RacingCapture;
 
 public class RacingService {
 
