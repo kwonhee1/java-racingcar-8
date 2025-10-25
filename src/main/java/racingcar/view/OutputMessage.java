@@ -15,6 +15,7 @@ public enum OutputMessage {
     ERROR("[ERROR] : %s"),
 
     ERROR_TOO_LONG_CAR_NAME("자동차 이름은 5글자 이하만 가능합니다"),
+    ERROR_RACING_COUNT_MUST_POSITIVE("실행 횟수는 1이상의 정수만 가능합니다")
     ;
 
     private String message;

@@ -23,10 +23,17 @@ public class RacingService {
     }
 
     public RacingResult racing(List<RacingCar> racingCarList, int racingCount) {
+        validateRacingCount(racingCount);
+
         List<RacingCapture> racingCaptureList = racingManyTimes(racingCarList, racingCount);
         WinningRacingCar winningRacingCar = getWinningRacingCar(racingCaptureList.getLast());
 
         return new RacingResult(racingCaptureList, winningRacingCar);
+    }
+
+    private void validateRacingCount(int racingCount) {
+        if (racingCount < 1)
+            throw new RacingCountMustPositiveException();
     }
 
     private List<RacingCapture> racingManyTimes(List<RacingCar> racingCarList, int racingCount) {

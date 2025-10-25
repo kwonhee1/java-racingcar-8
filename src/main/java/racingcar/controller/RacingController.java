@@ -3,6 +3,7 @@ package racingcar.controller;
 import java.util.List;
 import racingcar.domain.RacingCar;
 import racingcar.domain.exception.TooLongCarNameException;
+import racingcar.service.RacingCountMustPositiveException;
 import racingcar.service.RacingService;
 import racingcar.service.dto.CarCapture;
 import racingcar.service.dto.RacingCapture;
@@ -46,6 +47,9 @@ public class RacingController {
         try {
             int racingCount = inputView.inputRacingCount();
             return racingService.racing(carList, racingCount);
+        } catch (RacingCountMustPositiveException e){
+            outputView.printError(OutputMessage.ERROR_RACING_COUNT_MUST_POSITIVE.getMessage());
+            throw e;
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             throw e;
