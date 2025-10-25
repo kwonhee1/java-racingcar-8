@@ -7,4 +7,5 @@ public interface OutputView {
     void printCarResult(String carName, int carPosition);
     void printNextLine();
     void printResultEnd(List<String> winnerNameList);
+    void printError(String errorMessage);
 }

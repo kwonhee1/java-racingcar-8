@@ -1,12 +1,15 @@
 package racingcar.controller;
 
 import java.util.List;
+import java.util.function.Supplier;
 import racingcar.domain.RacingCar;
+import racingcar.domain.exception.TooLongCarNameException;
 import racingcar.service.RacingService;
 import racingcar.service.dto.CarCapture;
 import racingcar.service.dto.RacingCapture;
 import racingcar.service.dto.RacingResult;
 import racingcar.view.InputView;
+import racingcar.view.OutputMessage;
 import racingcar.view.OutputView;
 
 public class RacingController {
@@ -22,7 +25,7 @@ public class RacingController {
     }
 
     public void run() {
-        InputDto input = inputCarNamesAndRacingCount();
+        InputDto input = supply(()->inputCarNamesAndRacingCount());
         RacingResult result = racing(input);
         printResult(result);
     }
@@ -35,8 +38,20 @@ public class RacingController {
     }
 
     private RacingResult racing(InputDto input) {
-        List<RacingCar> carList = racingService.createRacingCars(input.getCarNameList());
+        List<RacingCar> carList = createRacingCars(input.getCarNameList());
         return racingService.racing(carList, input.getRacingCount());
+    }
+
+    private List<RacingCar> createRacingCars(List<String> carNames) {
+        try{
+            return racingService.createRacingCars(carNames);
+        } catch (TooLongCarNameException e) {
+            outputView.printError(OutputMessage.ERROR_TOO_LONG_CAR_NAME.getMessage());
+            throw e;
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            throw e;
+        }
     }
 
     private void printResult(RacingResult racingResult) {
@@ -52,6 +67,15 @@ public class RacingController {
             outputView.printCarResult(carCapture.getCarName(), carCapture.getCarPosition());
         }
         outputView.printNextLine();
+    }
+
+    private <T> T supply(Supplier<T> supplier) {
+        try{
+            return supplier.get();
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            throw e;
+        }
     }
 
 }

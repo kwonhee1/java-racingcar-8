@@ -28,4 +28,9 @@ public class SimpleOutputView implements OutputView {
         String winnerName = String.join(OutputMessage.RESULT_END_JOIN_REGEX.getMessage(), winnerNameList);
         System.out.println(OutputMessage.RESULT_END.getMessage(winnerName));
     }
+
+    @Override
+    public void printError(String errorMessage) {
+        System.out.println(OutputMessage.ERROR.getMessage(errorMessage));
+    }
 }

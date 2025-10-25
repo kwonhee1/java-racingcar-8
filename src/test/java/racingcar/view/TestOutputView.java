@@ -34,4 +34,9 @@ public class TestOutputView implements OutputView {
         String winnerName = String.join(OutputMessage.RESULT_END_JOIN_REGEX.getMessage(), winnerNameList);
         builder.append(OutputMessage.RESULT_END.getMessage(winnerName) + "\n");
     }
+
+    @Override
+    public void printError(String errorMessage) {
+        builder.append(OutputMessage.ERROR.getMessage(errorMessage));
+    }
 }
