@@ -18,7 +18,7 @@ public class RacingService {
 
     public List<RacingCar> createRacingCars(List<String> carNameList) {
         return carNameList.stream()
-                .map(RacingCar::of)
+                .map(RacingCar::new)
                 .toList();
     }
 

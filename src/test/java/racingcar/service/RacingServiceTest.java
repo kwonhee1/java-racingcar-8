@@ -28,7 +28,7 @@ public class RacingServiceTest {
     @DisplayName("racing service는 car를 capture함")
     public void captureTest() {
         String carName = "name";
-        RacingCar car = RacingCar.of(carName);
+        RacingCar car = new RacingCar(carName);
         RacingCar.setForwardCondition(new TestForwardCondition());
         car.forward(); car.forward();
 
@@ -43,8 +43,8 @@ public class RacingServiceTest {
     public void captureOrderTest() {
         String carName1 = "aaa";
         String carName2 = "bbb";
-        RacingCar car1 = RacingCar.of(carName1);
-        RacingCar car2 = RacingCar.of(carName2);
+        RacingCar car1 = new RacingCar(carName1);
+        RacingCar car2 = new RacingCar(carName2);
 
         RacingCapture racingCarCapture = new RacingCapture(1);
         racingCarCapture.addCapture(CarCapture.capture(car1));

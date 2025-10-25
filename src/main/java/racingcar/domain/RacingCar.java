@@ -9,14 +9,10 @@ public class RacingCar {
     private int position;
     private String name;
 
-    private RacingCar(String name) {
-        validateCarName(name);
-        this.name = name;
+    public RacingCar(String carName) {
+        validateCarName(carName);
+        this.name = carName;
         this.position = 0;
-    }
-
-    public static RacingCar of(String carName) {
-        return new RacingCar(carName);
     }
 
     private void validateCarName(String carName) {

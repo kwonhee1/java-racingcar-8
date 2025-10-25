@@ -13,16 +13,16 @@ public class RacingCarTest {
         String tooLongCarName = "Yellow";
 
         Assertions.assertThatNoException()
-                .isThrownBy(() -> RacingCar.of(carName));
+                .isThrownBy(() -> new RacingCar(carName));
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> RacingCar.of(tooLongCarName));
+                .isThrownBy(() -> new RacingCar(tooLongCarName));
     }
 
     @Test
     @DisplayName("자동차는 전진한다")
     public void carForwardTest() {
         RacingCar.setForwardCondition(new TestForwardCondition());
-        RacingCar car = RacingCar.of("name");
+        RacingCar car = new RacingCar("name");
 
         car.forward();
 
