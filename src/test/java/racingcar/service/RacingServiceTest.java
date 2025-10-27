@@ -5,7 +5,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.RacingCar;
-import racingcar.domain.TestForwardCondition;
 import racingcar.service.dto.CarCapture;
 import racingcar.service.dto.RacingCapture;
 import racingcar.service.dto.RacingResult;
@@ -14,11 +13,11 @@ public class RacingServiceTest {
 
     @Test
     @DisplayName("racing service는 racing car들을 생성함")
-    public void createRacingCars() {
+    public void createRandomRacingCars() {
         List<String> carNameList = List.of("aaa", "bbb", "ccc");
         RacingService racingService = RacingService.of();
 
-        List<RacingCar> carList = racingService.createRacingCars(carNameList);
+        List<RacingCar> carList = racingService.createRandomRacingCars(carNameList);
         List<String> createdCarNames = carList.stream().map(RacingCar::getName).toList();
 
         Assertions.assertThat(createdCarNames).containsAll(carNameList);
@@ -29,7 +28,6 @@ public class RacingServiceTest {
     public void captureTest() {
         String carName = "name";
         RacingCar car = new RacingCar(carName);
-        RacingCar.setForwardCondition(new TestForwardCondition());
         car.forward(); car.forward();
 
         CarCapture carCapture = CarCapture.capture(car);
@@ -59,10 +57,9 @@ public class RacingServiceTest {
     @Test
     @DisplayName("racing many times 결과 확인")
     public void racingTest() {
-        RacingService racingService = RacingService.of();
-        RacingCar.setForwardCondition(new TestForwardCondition());
+        RacingService racingService = new TestRacingService();
 
-        List<RacingCar> carList = racingService.createRacingCars(List.of("aaa", "bbb"));
+        List<RacingCar> carList = racingService.createRandomRacingCars(List.of("aaa", "bbb"));
 
         RacingResult racingResult = racingService.racing(carList, 3);
         List<RacingCapture> resultRacingCaptureList = racingResult.getRacingCaptureList();

@@ -36,7 +36,7 @@ public class RacingController {
 
     private List<RacingCar> createRacingCars() {
         List<String> carNames = inputView.inputCarNames();
-        return racingService.createRacingCars(carNames);
+        return racingService.createRandomRacingCars(carNames);
     }
 
     private RacingResult racing(List<RacingCar> carList) {

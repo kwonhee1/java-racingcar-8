@@ -3,6 +3,7 @@ package racingcar.service;
 import java.util.ArrayList;
 import java.util.List;
 import racingcar.domain.RacingCar;
+import racingcar.domain.RandomRacingCar;
 import racingcar.service.dto.CarCapture;
 import racingcar.service.dto.RacingCapture;
 import racingcar.service.dto.RacingResult;
@@ -16,9 +17,9 @@ public class RacingService {
         return instance;
     }
 
-    public List<RacingCar> createRacingCars(List<String> carNameList) {
+    public List<RacingCar> createRandomRacingCars(List<String> carNameList) {
         return carNameList.stream()
-                .map(RacingCar::new)
+                .map((name)-> (RacingCar) new RandomRacingCar(name))
                 .toList();
     }
 

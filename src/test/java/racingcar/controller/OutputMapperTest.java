@@ -6,13 +6,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.controller.mapper.OutputMapper;
 import racingcar.domain.RacingCar;
-import racingcar.domain.TestForwardCondition;
 import racingcar.service.RacingService;
+import racingcar.service.TestRacingService;
 import racingcar.service.dto.RacingResult;
 
 public class OutputMapperTest {
 
-    private RacingService racingService = RacingService.of();
+    private RacingService racingService = new TestRacingService();
 
     @Test
     @DisplayName("")
@@ -20,8 +20,7 @@ public class OutputMapperTest {
         List<String> carNameList = List.of("aaa", "bbb", "ccc");
         int racingCount = 3;
 
-        RacingCar.setForwardCondition(new TestForwardCondition());
-        List<RacingCar> racingCarList = racingService.createRacingCars(carNameList);
+        List<RacingCar> racingCarList = racingService.createRandomRacingCars(carNameList);
         RacingResult racingResult = racingService.racing(racingCarList, racingCount);
 
         String str = OutputMapper.racingCaptureListToString(racingResult.getRacingCaptureList());
@@ -38,8 +37,7 @@ public class OutputMapperTest {
         List<String> carNameList = List.of("aaa", "bbb", "ccc");
         int racingCount = 3;
 
-        RacingCar.setForwardCondition(new TestForwardCondition());
-        List<RacingCar> racingCarList = racingService.createRacingCars(carNameList);
+        List<RacingCar> racingCarList = racingService.createRandomRacingCars(carNameList);
         RacingResult racingResult = racingService.racing(racingCarList, racingCount);
 
         String str = OutputMapper.winningRacingCarToString(racingResult.getWinningRacingCar());

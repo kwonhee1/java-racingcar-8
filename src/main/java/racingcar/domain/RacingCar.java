@@ -5,7 +5,6 @@ import racingcar.domain.exception.TooLongCarNameException;
 
 public class RacingCar {
 
-    private static ForwardCondition forwardCondition = RandomForwardCondition.of();
     private int position;
     private String name;
 
@@ -21,8 +20,7 @@ public class RacingCar {
     }
 
     public void forward() {
-        if(forwardCondition.canForward())
-            position++;
+        position++;
     }
 
     public int getPosition() {
@@ -31,9 +29,5 @@ public class RacingCar {
 
     public String getName() {
         return name;
-    }
-
-    public static void setForwardCondition(ForwardCondition newForwardCondition) {
-        forwardCondition = newForwardCondition;
     }
 }

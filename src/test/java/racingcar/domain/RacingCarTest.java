@@ -21,7 +21,6 @@ public class RacingCarTest {
     @Test
     @DisplayName("자동차는 전진한다")
     public void carForwardTest() {
-        RacingCar.setForwardCondition(new TestForwardCondition());
         RacingCar car = new RacingCar("name");
 
         car.forward();

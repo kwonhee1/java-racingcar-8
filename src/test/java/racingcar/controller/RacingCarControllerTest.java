@@ -3,9 +3,7 @@ package racingcar.controller;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import racingcar.domain.RacingCar;
-import racingcar.domain.TestForwardCondition;
-import racingcar.service.RacingService;
+import racingcar.service.TestRacingService;
 import racingcar.view.InputView;
 import racingcar.view.OutputMessage;
 import racingcar.view.OutputView;
@@ -21,8 +19,7 @@ public class RacingCarControllerTest {
 
         InputView inputView = new TestInputView(carList, 3);
         OutputView outputView = new TestOutputView(result);
-        RacingController racingController = new RacingController(inputView, outputView, RacingService.of());
-        RacingCar.setForwardCondition(new TestForwardCondition());
+        RacingController racingController = new RacingController(inputView, outputView, new TestRacingService());
 
         racingController.run();
         String winnerCars = String.join(OutputMessage.RESULT_END_JOIN_REGEX.getMessage(), carList);
