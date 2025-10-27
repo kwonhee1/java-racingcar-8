@@ -25,7 +25,7 @@ public class RacingService {
     public RacingResult racing(List<RacingCar> racingCarList, int racingCount) {
         validateRacingCount(racingCount);
 
-        List<RacingCapture> racingCaptureList = racingManyTimes(racingCarList, racingCount);
+        List<RacingCapture> racingCaptureList = racingManyTimesWithCapture(racingCarList, racingCount);
         WinningRacingCar winningRacingCar = getWinningRacingCar(racingCaptureList.getLast());
 
         return new RacingResult(racingCaptureList, winningRacingCar);
@@ -36,24 +36,22 @@ public class RacingService {
             throw new RacingCountMustPositiveException();
     }
 
-    private List<RacingCapture> racingManyTimes(List<RacingCar> racingCarList, int racingCount) {
+    private List<RacingCapture> racingManyTimesWithCapture(List<RacingCar> racingCarList, int totalRacingCount) {
         List<RacingCapture> racingCaptureList = new ArrayList<>();
 
-        for(int nowRacingCount = 1; nowRacingCount <= racingCount; nowRacingCount++) {
-            RacingCapture racingCapture = racingOnce(racingCarList, nowRacingCount);
+        for(int nowRacingCount = 1; nowRacingCount <= totalRacingCount; nowRacingCount++) {
+            List<RacingCar> racingCarListAfterRacing = racingOnce(racingCarList);
+            RacingCapture racingCapture = RacingCapture.captureRacingResult(racingCarListAfterRacing, nowRacingCount);
             racingCaptureList.add(racingCapture);
         }
 
         return racingCaptureList;
     }
 
-    private RacingCapture racingOnce(List<RacingCar> racingCarList, int racingCount) {
-        RacingCapture racingCapture = new RacingCapture(racingCount);
-        for(RacingCar racingCar : racingCarList) {
+    private List<RacingCar> racingOnce(List<RacingCar> racingCarList) {
+        for(RacingCar racingCar : racingCarList)
             racingCar.forward();
-            racingCapture.addCapture(CarCapture.capture(racingCar));
-        }
-        return racingCapture;
+        return racingCarList;
     }
 
     private WinningRacingCar getWinningRacingCar(RacingCapture lastRacingCapture) {
