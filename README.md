@@ -23,6 +23,16 @@
     - 여러 Exception 정의하기
     - ExceptionMapper 구현하기
 
+# 리뷰 받고 싶은 부분
+- racing결과를 capture해 두고 모든 racing이 끝난 후 반환하도록 설계하였습니다
+    - capture에 필요한 많은 dto가 필요해졌습니다 
+    - RacingService가 capture에 대한 책임을 가져가면서 코드가 복잡해졌습니다
+    - 위 두가지 부분에서 처음 코드를 읽을 때 이해하기 어려운지 궁금합니다
+- git commit message를 일관성있게 작성하기 위해 노력했습니다
+    - 더 보기 좋은 git commit message예시가 궁금합니다
+- TestRacingService : test를 위해 RacingService를 상속해야 수정했습니다 (mocking용 class)
+    - 처음 test코드를 읽을 때 RacingService를 TestRacingService로 두고 필요한 함수들을 Override한 부분을 눈치챘는지 궁금합니다.
+
 # 프로그래밍 요구 사항
 - indent depth가 3이 넘지 않도록 한다
 - test 코드를 작성한다
