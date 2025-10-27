@@ -11,12 +11,6 @@ import racingcar.service.dto.WinningRacingCar;
 
 public class RacingService {
 
-    private static final RacingService instance = new RacingService();
-
-    public static RacingService of() {
-        return instance;
-    }
-
     public List<RacingCar> createRandomRacingCars(List<String> carNameList) {
         return carNameList.stream()
                 .map((name)-> (RacingCar) new RandomRacingCar(name))

@@ -15,7 +15,7 @@ public class RacingServiceTest {
     @DisplayName("racing service는 racing car들을 생성함")
     public void createRandomRacingCars() {
         List<String> carNameList = List.of("aaa", "bbb", "ccc");
-        RacingService racingService = RacingService.of();
+        RacingService racingService = new RacingService();
 
         List<RacingCar> carList = racingService.createRandomRacingCars(carNameList);
         List<String> createdCarNames = carList.stream().map(RacingCar::getName).toList();

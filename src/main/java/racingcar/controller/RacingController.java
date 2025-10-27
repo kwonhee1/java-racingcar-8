@@ -20,12 +20,13 @@ public class RacingController {
     public RacingController(
             InputView inputView,
             OutputView outputView,
-            RacingService racingService
+            RacingService racingService,
+            ExceptionMapper exceptionMapper
     ) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.racingService = racingService;
-        exceptionMapper = ExceptionMapper.of();
+        this.exceptionMapper = exceptionMapper;
     }
 
     public void run() {

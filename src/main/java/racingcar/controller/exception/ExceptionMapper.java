@@ -7,16 +7,11 @@ import java.util.Map;
 
 public class ExceptionMapper {
 
-    private static final ExceptionMapper instance = new ExceptionMapper();
     private static final ExceptionHandler exceptionHandler = new ExceptionHandler();
 
     private final Map<Class<? extends IllegalArgumentException>, Method> MESSAGES_MAP = new HashMap<>();
 
-    public static ExceptionMapper of() {
-        return instance;
-    }
-
-    private ExceptionMapper() {
+    public ExceptionMapper() {
         initMessageMap();
     }
 
