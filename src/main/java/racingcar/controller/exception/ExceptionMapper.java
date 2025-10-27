@@ -30,13 +30,13 @@ public class ExceptionMapper {
         Method hadlerMethod = MESSAGES_MAP.get(exception.getClass());
 
         if (hadlerMethod == null)
-            return exception.getMessage();
+            throw new NoExceptionHandlerMethodException(exception);
 
         String errorMessage;
         try {
             errorMessage = (String) hadlerMethod.invoke(exceptionHandler, exception);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
 
         return errorMessage;
